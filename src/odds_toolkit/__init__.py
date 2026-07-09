@@ -6,6 +6,7 @@ from .odds import (
     implied_prob,
     remove_overround,
     expected_value,
+    fair_odds,
 )
 
 __all__ = [
@@ -16,5 +17,6 @@ __all__ = [
     "implied_prob",
     "remove_overround",
     "expected_value",
+    "fair_odds",
 ]
 __version__ = "0.1.1"

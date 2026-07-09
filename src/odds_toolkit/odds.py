@@ -60,3 +60,10 @@ def expected_value(true_p: float, decimal: float, stake: float = 1.0) -> float:
     win = stake * (decimal - 1.0)
     lose = -stake
     return true_p * win + (1.0 - true_p) * lose
+
+
+def fair_odds(true_p: float) -> float:
+    """Decimal odds implied by a true probability (no overround)."""
+    if not 0.0 < true_p <= 1.0:
+        raise ValueError("true_p must be in (0, 1]")
+    return 1.0 / true_p
