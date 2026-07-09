@@ -17,4 +17,4 @@ __all__ = [
     "remove_overround",
     "expected_value",
 ]
-__version__ = "0.1.0"
+__version__ = "0.1.1"
