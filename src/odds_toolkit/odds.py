@@ -67,3 +67,10 @@ def fair_odds(true_p: float) -> float:
     if not 0.0 < true_p <= 1.0:
         raise ValueError("true_p must be in (0, 1]")
     return 1.0 / true_p
+
+
+def prob_to_american(true_p: float) -> float:
+    """Convert a win probability to American odds (fair, no juice)."""
+    if not 0.0 < true_p < 1.0:
+        raise ValueError("true_p must be in (0, 1)")
+    return decimal_to_american(1.0 / true_p)
