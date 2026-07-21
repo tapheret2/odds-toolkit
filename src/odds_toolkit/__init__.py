@@ -8,6 +8,7 @@ from .odds import (
     expected_value,
     fair_odds,
     prob_to_american,
+    overround,
     payout,
 )
 
@@ -21,6 +22,7 @@ __all__ = [
     "expected_value",
     "fair_odds",
     "prob_to_american",
+    "overround",
     "payout",
 ]
 __version__ = "0.1.2"
