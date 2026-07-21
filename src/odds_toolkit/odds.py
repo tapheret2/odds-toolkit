@@ -74,3 +74,21 @@ def prob_to_american(true_p: float) -> float:
     if not 0.0 < true_p < 1.0:
         raise ValueError("true_p must be in (0, 1)")
     return decimal_to_american(1.0 / true_p)
+
+
+def overround(probs: list[float]) -> float:
+    """Bookmaker overround = sum(implied probs) - 1."""
+    if not probs:
+        raise ValueError("empty probs")
+    if any(p <= 0 for p in probs):
+        raise ValueError("probs must be > 0")
+    return sum(probs) - 1.0
+
+
+def payout(stake: float, decimal: float) -> float:
+    """Gross return (stake * decimal) for a winning bet."""
+    if stake < 0:
+        raise ValueError("stake must be >= 0")
+    if decimal <= 1.0:
+        raise ValueError("Decimal odds must be > 1")
+    return stake * decimal
