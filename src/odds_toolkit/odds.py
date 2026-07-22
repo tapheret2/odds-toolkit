@@ -92,3 +92,19 @@ def payout(stake: float, decimal: float) -> float:
     if decimal <= 1.0:
         raise ValueError("Decimal odds must be > 1")
     return stake * decimal
+
+
+def clv(open_decimal: float, close_decimal: float) -> float:
+    """Closing line value: relative improvement of open vs close decimal odds.
+
+    Positive means the open price was better than close (for the bettor).
+    """
+    if open_decimal <= 1.0 or close_decimal <= 1.0:
+        raise ValueError("decimal odds must be > 1")
+    return (open_decimal / close_decimal) - 1.0
+
+
+def vig_free_two_way(dec_a: float, dec_b: float) -> tuple[float, float]:
+    """Proportional no-vig fair probs for a two-way market."""
+    pa, pb = implied_prob(dec_a), implied_prob(dec_b)
+    return tuple(remove_overround([pa, pb]))  # type: ignore[return-value]
