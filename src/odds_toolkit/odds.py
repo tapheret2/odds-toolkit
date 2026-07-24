@@ -108,3 +108,23 @@ def vig_free_two_way(dec_a: float, dec_b: float) -> tuple[float, float]:
     """Proportional no-vig fair probs for a two-way market."""
     pa, pb = implied_prob(dec_a), implied_prob(dec_b)
     return tuple(remove_overround([pa, pb]))  # type: ignore[return-value]
+
+
+def parlay_decimal(odds: list[float]) -> float:
+    """Combined decimal odds for independent legs (product)."""
+    if not odds:
+        raise ValueError("odds list must be non-empty")
+    out = 1.0
+    for o in odds:
+        if o <= 0:
+            raise ValueError("each decimal odds must be positive")
+        out *= float(o)
+    return out
+
+
+def no_vig_two_way(p_a: float, p_b: float) -> tuple[float, float]:
+    """Normalize two-way implied probs so they sum to 1."""
+    s = p_a + p_b
+    if s <= 0:
+        raise ValueError("probabilities must sum to a positive value")
+    return p_a / s, p_b / s
